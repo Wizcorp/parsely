@@ -1,0 +1,11 @@
+{
+	"name": "parsely",
+	"description": "Build CSVParser configuration with parsely.",
+	"version": "0.1.0",
+	"dependencies": {
+		"Wizcorp/CSVParser": "0.1.12"
+	},
+	"scripts": [
+		"index.js"
+	]
+}
