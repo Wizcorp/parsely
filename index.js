@@ -2,7 +2,6 @@ var CSVParser = require('csvparser');
 
 exports.parsers = {};
 exports.staticData = {};
-exports.targets = {};
 
 exports.buildQuery = function (dataSources) {
 	var query = {};
@@ -22,8 +21,8 @@ exports.buildStaticData = function (dataSources) {
 	}
 };
 
-exports.getTarget = function (what) {
-	return document.getElementById(what + 'Target');
+exports.getTarget = function (name) {
+	return document.getElementById(name + 'Target');
 };
 
 function updateStaticData(opName, vaultValue) {
@@ -37,17 +36,11 @@ exports.addDataListeners = function (archivist, dataSources) {
 	}
 };
 
-function getImporter(what) {
-	return require('./importers/' + what);
-}
-
-function getLoader(archivist, what) {
+function getLoader(archivist, name, importer) {
 	return function (cb) {
-		var importer = getImporter(what);
-
-		archivist.get(importer.topic || what, [], { optional: true }, function (error, data) {
+		archivist.get(importer.topic || name, [], { optional: true }, function (error, data) {
 			if (error) {
-				console.log('error loading', what);
+				console.log('error loading', name);
 			}
 
 			cb(null, data);
@@ -55,29 +48,25 @@ function getLoader(archivist, what) {
 	};
 }
 
-function getSaver(archivist, what) {
+function getSaver(archivist, name, importer) {
 	return function (data, cb) {
-		var importer = getImporter(what);
-
 		var transform = importer.transform;
 
 		if (transform) {
 			data = transform(data, exports.staticData);
 		}
 
-		archivist.set(importer.topic || what, [], data);
+		archivist.set(importer.topic || name, [], data);
 		archivist.distribute(cb);
 	};
 }
 
-function getConfig(archivist, what) {
-	var importer = getImporter(what);
-
+function getConfig(archivist, name, importer) {
 	var config = {
-		target: exports.getTarget(what),
+		target: exports.getTarget(name),
 		rules: importer.rules,
-		loadData: getLoader(archivist, what),
-		saveData: getSaver(archivist, what),
+		loadData: getLoader(archivist, name, importer),
+		saveData: getSaver(archivist, name, importer),
 		tests: importer.tests,
 		options: importer.options
 	};
@@ -98,9 +87,9 @@ function getConfig(archivist, what) {
 }
 
 exports.buildParsers = function (archivist, importers) {
-	for (var i = 0; i < importers.length; i += 1) {
-		var importer = importers[i];
-		var config = getConfig(archivist, importer);
+	for (var name in importers) {
+		var importer = importers[name];
+		var config = getConfig(archivist, name, importer);
 		exports.parsers[importer] = new CSVParser(config);
 	}
 };
