@@ -90,6 +90,6 @@ exports.buildParsers = function (archivist, importers) {
 	for (var name in importers) {
 		var importer = importers[name];
 		var config = getConfig(archivist, name, importer);
-		exports.parsers[importer] = new CSVParser(config);
+		exports.parsers[name] = new CSVParser(config);
 	}
 };
