@@ -80,7 +80,7 @@ function getConfig(archivist, name, importer) {
 	for (var test in config.tests) {
 		var originalTest = config.tests[test].test;
 
-		config.tests[test] = { test: wrapTest(originalTest) };
+		config.tests[test].test = wrapTest(originalTest);
 	}
 
 	return config;
