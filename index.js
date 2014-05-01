@@ -2,6 +2,7 @@ var CSVParser = require('csvparser');
 
 exports.parsers = {};
 exports.staticData = {};
+exports.dataListeners = {};
 
 exports.buildQuery = function (dataSources) {
 	var query = {};
@@ -27,6 +28,9 @@ exports.getTarget = function (name) {
 
 function updateStaticData(opName, vaultValue) {
 	exports.staticData[vaultValue.topic] = vaultValue.data || {};
+	for (var name in exports.dataListeners) {
+		exports.dataListeners[name].onLoad(vaultValue.topic, exports.staticData);
+	}
 }
 
 exports.addDataListeners = function (archivist, dataSources) {
@@ -89,6 +93,12 @@ function getConfig(archivist, name, importer) {
 exports.buildParsers = function (archivist, importers) {
 	for (var name in importers) {
 		var importer = importers[name];
+
+		if (importer.hasOwnProperty('onLoad')) {
+			importer.onLoad(null, exports.staticData);
+			exports.dataListeners[name] = importer;
+		}
+
 		var config = getConfig(archivist, name, importer);
 		exports.parsers[name] = new CSVParser(config);
 	}
