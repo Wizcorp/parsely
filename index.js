@@ -42,7 +42,7 @@ exports.addDataListeners = function (archivist, dataSources) {
 
 function getLoader(archivist, name, importer) {
 	return function (cb) {
-		archivist.get(importer.topic || name, [], { optional: true }, function (error, data) {
+		archivist.get(importer.topic || name, importer.index || [], { optional: true }, function (error, data) {
 			if (error) {
 				console.log('error loading', name);
 			}
@@ -60,7 +60,7 @@ function getSaver(archivist, name, importer) {
 			data = transform(data, exports.staticData);
 		}
 
-		archivist.set(importer.topic || name, [], data);
+		archivist.set(importer.topic || name, importer.index || [], data);
 		archivist.distribute(cb);
 	};
 }
