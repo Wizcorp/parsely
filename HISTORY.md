@@ -1,5 +1,9 @@
 # Release history
 
+## 0.1.12
+
+Bump csvparser version to v0.1.19, now ignores columns containing an asterisk.
+
 ## 0.1.11
 
 Allow parsing index in save and load
