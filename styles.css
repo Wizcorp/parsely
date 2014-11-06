@@ -1,0 +1,22 @@
+.mode {
+	padding: 10px 0;
+}
+
+.mode span {
+	margin-right: 5px;
+}
+
+.dropElement {
+	width: 50%;
+	height: 60px;
+	border: 3px dashed black;
+	text-align: center;
+	line-height: 60px;
+	font-size: 16px;
+	color: rgba(0,0,0,0.2);
+	margin: 10px 0;
+}
+
+.downloadBtn {
+	margin-bottom: 10px;
+}
