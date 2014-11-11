@@ -1,5 +1,10 @@
 # Release history
 
+## 0.2.0
+
+Parsely can now import and export in json format. Most display logic was moved from csvparser into
+parsely.
+
 ## 0.1.12
 
 Bump csvparser version to v0.1.19, now ignores columns containing an asterisk.

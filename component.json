@@ -1,7 +1,7 @@
 {
 	"name": "parsely",
 	"description": "Build CSVParser configuration with parsely.",
-	"version": "0.1.12",
+	"version": "0.2.0",
 	"dependencies": {
 		"component/emitter": "1.1.1",
 		"Wizcorp/csvparser": "0.2.1"
