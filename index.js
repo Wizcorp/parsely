@@ -1,4 +1,4 @@
-var CSVParser = require('csvparser');
+var Parser = require('./Parser.js');
 
 exports.parsers = {};
 exports.staticData = {};
@@ -67,6 +67,7 @@ function getSaver(archivist, name, importer) {
 
 function getConfig(archivist, name, importer) {
 	var config = {
+		name: name,
 		target: exports.getTarget(name),
 		rules: importer.rules,
 		loadData: getLoader(archivist, name, importer),
@@ -90,7 +91,9 @@ function getConfig(archivist, name, importer) {
 	return config;
 }
 
-exports.buildParsers = function (archivist, importers) {
+exports.buildParsers = function (archivist, importers, options) {
+	options = options || {};
+
 	for (var name in importers) {
 		var importer = importers[name];
 
@@ -100,6 +103,6 @@ exports.buildParsers = function (archivist, importers) {
 		}
 
 		var config = getConfig(archivist, name, importer);
-		exports.parsers[name] = new CSVParser(config);
+		exports.parsers[name] = new Parser(config, options.renderer);
 	}
 };
