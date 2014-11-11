@@ -4,7 +4,7 @@
 	"version": "0.1.12",
 	"dependencies": {
 		"component/emitter": "1.1.1",
-		"Wizcorp/csvparser": "0.2.0"
+		"Wizcorp/csvparser": "0.2.1"
 	},
 	"scripts": [
 		"index.js",
