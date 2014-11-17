@@ -1,5 +1,9 @@
 # Release history
 
+## 0.2.1
+* Update dependency component/emitter from v1.1.1 to v1.1.3
+* Update dependency Wizcorp/csvparser from v0.2.1 to v0.2.2
+
 ## 0.2.0
 
 Parsely can now import and export in json format. Most display logic was moved from csvparser into
