@@ -1,5 +1,8 @@
 # Release history
 
+## v0.2.2
+* The JSON importer now displays the imported data before you save it.
+
 ## 0.2.1
 * Update dependency component/emitter from v1.1.1 to v1.1.3
 * Update dependency Wizcorp/csvparser from v0.2.1 to v0.2.2
