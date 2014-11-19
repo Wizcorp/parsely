@@ -239,6 +239,7 @@ function createSaveCancelButtons(parser) {
 		cancelButton.hide();
 		parser.modeButtons.show();
 		parser.dropElement.show();
+		parser.dataDisplay.refresh();
 		parser.dataDisplay.show();
 		parser.csvParser.resultElement.hide();
 	}
@@ -269,9 +270,9 @@ function Parser(cfg, renderer) {
 
 	createDownloadButton(this);
 	createModeButtons(this);
+	createSaveCancelButtons(this);
 	createDropElement(this);
 	createDataDisplay(this);
-	createSaveCancelButtons(this);
 
 	function dataParsed(parsed) {
 		that.parsed = parsed;
@@ -307,6 +308,8 @@ Parser.prototype.parse = function (result) {
 		},
 		json: function (result) {
 			that.parseJSON(result);
+			that.dataDisplay.update(that.parsed);
+			that.dataDisplay.show();
 		}
 	};
 
