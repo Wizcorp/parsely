@@ -1,11 +1,14 @@
-# Release history
+# parsely History
+
+## v0.2.3
+* Update dependency Wizcorp/csvparser from [v0.2.2](https://github.com/Wizcorp/csvparser/releases/tag/0.2.2) to [v0.2.3](https://github.com/Wizcorp/csvparser/releases/tag/0.2.3)
 
 ## v0.2.2
 * The JSON importer now displays the imported data before you save it.
 
 ## 0.2.1
 * Update dependency component/emitter from v1.1.1 to v1.1.3
-* Update dependency Wizcorp/csvparser from v0.2.1 to v0.2.2
+* Update dependency Wizcorp/csvparser from [v0.2.1](https://github.com/Wizcorp/csvparser/releases/tag/0.2.1) to [v0.2.2](https://github.com/Wizcorp/csvparser/releases/tag/0.2.2)
 
 ## 0.2.0
 
